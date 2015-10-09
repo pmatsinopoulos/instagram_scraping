@@ -44,21 +44,24 @@ end
 
 sleep(2)
 
-i = 0
+i = 1
 next_post_button = true
 while next_post_button
+  puts "going to post #{i}"
+
   like_heart = $app.explore_tags.likes.first
 
   if like_heart.nil?
-    puts "no like heart found"
+    puts "...no like heart found"
   else
     like_heart.click
 
     comment_input = $app.explore_tags.comments.first
     if comment_input.nil?
-      puts "no comment area found"
+      puts "...no comment area found"
     else
       comment_input.set "#{comment}\n"
+      puts "...comment posted"
     end
   end
 
@@ -68,7 +71,6 @@ while next_post_button
   unless next_post_button.nil?
     next_post_button.click
     i += 1
-    puts "going to post #{i}"
     sleep(2)
   end
 
