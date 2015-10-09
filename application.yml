@@ -1,0 +1,11 @@
+defaults: &defaults
+  instagram_root_url: 'https://instagram.com'
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
