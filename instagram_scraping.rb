@@ -68,8 +68,9 @@ while next_post_button
     end
   end
 
-  next_post_button = $app.explore_tags.next_post
   sleep(3)
+
+  next_post_button = $app.explore_tags.next_post
 
   unless next_post_button.nil?
     next_post_button.click
