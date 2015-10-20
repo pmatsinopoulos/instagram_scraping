@@ -48,9 +48,11 @@ puts "Comments to be used: #{comments.inspect}" unless comments.nil?
 
 Capybara.register_driver :firefox_with_proxy do |app|
 
+  proxy = "#{ENV['INSTAGRAM_SCRAPING_PROXY_HOST']}:#{ENV['INSTAGRAM_SCRAPING_PROXY_PORT']}"
   profile = Selenium::WebDriver::Firefox::Profile.new
   profile.proxy = Selenium::WebDriver::Proxy.new(
-      :http           => "#{ENV['INSTAGRAM_SCRAPING_PROXY_HOST']}:#{ENV['INSTAGRAM_SCRAPING_PROXY_PORT']}",
+      :http           => proxy,
+      :ssl            => proxy,
       :socks_username => ENV['INSTAGRAM_SCRAPING_PROXY_USERNAME'],
       :socks_password => ENV['INSTAGRAM_SCRAPING_PROXY_PASSWORD']
   )
