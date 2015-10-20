@@ -1,6 +1,8 @@
 require 'dotenv'
 Dotenv.load
 
+puts "Using proxy: #{ENV['INSTAGRAM_SCRAPING_PROXY_HOST']}"
+
 require "capybara"
 require 'selenium/webdriver'
 
@@ -15,10 +17,20 @@ require 'page_objects/pages/explore_tags_page'
 require 'page_objects/application'
 require 'browse_helpers'
 
+def read_from_file(filename)
+  full_path = "#{File.expand_path("..", __FILE__)}/#{filename}"
+  result = []
+  File.readlines(full_path).each do |line|
+    line.chomp!
+    result << line unless line.empty?
+  end
+  result
+end
+
 username = ARGV[0].chomp
 hash_tag = ARGV[1].chomp
-comment = nil
-comment  = ARGV[2].chomp unless ARGV[2].nil?
+comments = nil
+comments = read_from_file(ARGV[2].chomp) unless ARGV[2].nil?
 
 puts "Email: #{username}"
 puts "Hash Tag: #{hash_tag}"
@@ -31,6 +43,8 @@ if password.empty?
   puts "It cannot be blank"
   exit 1
 end
+
+puts "Comments to be used: #{comments.inspect}" unless comments.nil?
 
 Capybara.register_driver :firefox_with_proxy do |app|
 
@@ -63,6 +77,7 @@ sleep(2)
 
 i = 1
 next_post_button = true
+comments_index = 0
 while next_post_button
   puts "going to post #{i}"
 
@@ -73,13 +88,15 @@ while next_post_button
   else
     like_heart.click
 
-    unless comment.nil?
+    unless comments.nil?
       comment_input = $app.explore_tags.comments.first
       if comment_input.nil?
         puts "...no comment area found"
       else
-        comment_input.set "#{comment}\n"
+        comment_input.set "#{comments[comments_index]}\n"
         puts "...comment posted"
+        comments_index += 1
+        comments_index = 0 if comments_index == comments.size
       end
     end
   end

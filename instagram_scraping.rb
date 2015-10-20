@@ -73,6 +73,7 @@ end
 
 username = ARGV[0].chomp
 hash_tag = ARGV[1].chomp
+comments = nil
 comments = read_from_file(ARGV[2].chomp) unless ARGV[2].nil?
 
 puts "Email: #{username}"
