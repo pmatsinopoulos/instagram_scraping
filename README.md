@@ -13,15 +13,31 @@ to install all the necessary gems.
 
 On the command line:
 
-```
-bundle exec ruby instagram_scraping.rb <your_username> <hash_tag_without_sharp_symbol> <your_message_in_single_quotes_if_many_words>
-```
-
-Example of usage:
+#### If you only want to like and not comment:
 
 ```
-bundle exec ruby instagram_scraping.rb panayotism 12345678 studybreak 'This is my message to all posts'
+bundle exec ruby instagram_scraping.rb <your_username> <hash_tag_without_sharp_symbol>
 ```
+such as:
+
+```
+bundle exec ruby instagram_scraping.rb panayotism studybreak
+```
+which will like all the pages with the hashtag `#studybreak`.
+
+#### If you want to like and to add comment:
+
+```
+bundle exec ruby instagram_scraping.rb <your_username> <hash_tag_without_sharp_symbol> <relative_path_to_file_with_comments>
+```
+such as:
+```
+bundle exec ruby instagram_scraping.rb panayotism studybreak comments.txt
+```
+where `comments.txt` is a file with comments on the same folder as the program folder. Each line contains one comment. The comments
+are used in a round robin manner.
+
+
 
 
 
