@@ -90,7 +90,7 @@ end
 
 puts "Comments to be used: #{comments.inspect}" unless comments.nil?
 
-Capybara.default_driver = :webkit
+Capybara.default_driver = :selenium
 
 $app = PageObjects::Application.new
 
