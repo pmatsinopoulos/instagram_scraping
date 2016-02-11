@@ -38,6 +38,11 @@ where `comments.txt` is a file with comments on the same folder as the program f
 are used in a round robin manner.
 
 
+## Be Aware Of
+
+Scraping a site is vulnerable to changes of the site UI. If the program does not work, this might mean that site has changed its UI.
+You may need to update the files that define the pages in order to make the program run again successfully.
+
 
 
 
