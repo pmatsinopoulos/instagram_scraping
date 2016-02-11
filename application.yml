@@ -1,5 +1,5 @@
 defaults: &defaults
-  instagram_root_url: 'https://instagram.com'
+  instagram_root_url: 'https://www.instagram.com'
 
 development:
   <<: *defaults
